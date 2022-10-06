@@ -38,70 +38,103 @@ public final class SocketConfiguration {
     }
 
     public void setTlsConfiguration(final TlsConfiguration tlsConfiguration) {
+        //print ???
         this.tlsConfiguration = tlsConfiguration;
     }
 
     public Integer getSocketTimeout() {
+        Integer ctestParam = socketTimeout;
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return socketTimeout;
     }
 
     public void setSocketTimeout(Integer socketTimeout) {
+        Integer ctestParam = socketTimeout;
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.socketTimeout = socketTimeout;
     }
 
     public Boolean getReuseAddress() {
+        String ctestParam = reuseAddress.toString();
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return reuseAddress;
     }
 
     public void setReuseAddress(Boolean reuseAddress) {
+        String ctestParam = reuseAddress.toString();
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.reuseAddress = reuseAddress;
     }
 
     public Boolean getKeepAlive() {
+        String ctestParam = keepAlive.toString();
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return keepAlive;
     }
 
     public void setKeepAlive(Boolean keepAlive) {
+        String ctestParam = keepAlive.toString();
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.keepAlive = keepAlive;
     }
 
     public Boolean getOobInline() {
+        String ctestParam = oobInline.toString();
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return oobInline;
     }
 
     public void setOobInline(Boolean oobInline) {
+        String ctestParam = oobInline.toString();
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.oobInline = oobInline;
     }
 
     public Integer getReceiveBufferSize() {
+        Integer ctestParam = receiveBufferSize;
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return receiveBufferSize;
     }
 
     public void setReceiveBufferSize(Integer receiveBufferSize) {
+        Integer ctestParam = receiveBufferSize;
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.receiveBufferSize = receiveBufferSize;
     }
 
     public Integer getSendBufferSize() {
+        Integer ctestParam = sendBufferSize;
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return sendBufferSize;
     }
 
     public void setSendBufferSize(Integer sendBufferSize) {
+        Integer ctestParam = sendBufferSize;
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.sendBufferSize = sendBufferSize;
     }
 
     public Boolean getTcpNoDelay() {
+        String ctestParam = tcpNoDelay.toString();
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return tcpNoDelay;
     }
 
     public void setTcpNoDelay(Boolean tcpNoDelay) {
+        String ctestParam = tcpNoDelay.toString();
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.tcpNoDelay = tcpNoDelay;
     }
 
     public Integer getTrafficClass() {
+        Integer ctestParam = trafficClass;
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return trafficClass;
     }
 
     public void setTrafficClass(Integer trafficClass) {
+        Integer ctestParam = trafficClass;
+        System.out.println("[CTEST][SET-PARAM] " + ctestParam); //add ctest
         this.trafficClass = trafficClass;
     }
 
