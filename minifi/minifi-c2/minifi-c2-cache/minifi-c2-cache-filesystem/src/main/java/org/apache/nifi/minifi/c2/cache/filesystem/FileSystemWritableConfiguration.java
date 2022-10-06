@@ -45,20 +45,21 @@ public class FileSystemWritableConfiguration implements WriteableConfiguration {
 
     @Override
     public String getVersion() {
-        System.out.println("[CTEST][GET-PARAM] " + version); //add ctest
+        String ctestParam = version;
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return version;
     }
 
     @Override
     public boolean exists() {
-        System.out.println("[CTEST][GET-PARAM] " + path); //add ctest
         return Files.exists(path);
     }
 
     @Override
     public OutputStream getOutputStream() throws ConfigurationProviderException {
         try {
-            System.out.println("[CTEST][GET-PARAM] " + path); //add ctest
+            String ctestParam = path;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             Path parent = path.getParent();
             Files.createDirectories(parent);
             Path tmpPath = cache.resolveChildAndVerifyParent(parent, path.getFileName().toString() + "." + UUID.randomUUID().toString());
@@ -77,7 +78,8 @@ public class FileSystemWritableConfiguration implements WriteableConfiguration {
     @Override
     public InputStream getInputStream() throws ConfigurationProviderException {
         try {
-            System.out.println("[CTEST][GET-PARAM] " + path); //add ctest
+            String ctestParam = path;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return Files.newInputStream(path, StandardOpenOption.READ);
         } catch (IOException e) {
             if (Files.exists(path)) {
@@ -91,7 +93,8 @@ public class FileSystemWritableConfiguration implements WriteableConfiguration {
     @Override
     public URL getURL() throws ConfigurationProviderException {
         try {
-            System.out.println("[CTEST][GET-PARAM] " + path); //add ctest
+            String ctestParam = path;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return path.toUri().toURL();
         } catch (MalformedURLException murle) {
             throw new ConfigurationProviderException("Could not determine URL of " + path, murle);
@@ -100,7 +103,8 @@ public class FileSystemWritableConfiguration implements WriteableConfiguration {
 
     @Override
     public String getName() {
-        System.out.println("[CTEST][GET-PARAM] " + path.getFileName().toString()); //add ctest
+        String ctestParam = path.getFileName().toString();
+        System.out.println("[CTEST][GET-PARAM] " + ctestParampath.getFileName().toString()); //add ctest
         return path.getFileName().toString();
     }
 

@@ -64,6 +64,8 @@ public class S3WritableConfiguration implements WriteableConfiguration {
 
   @Override
   public String getVersion() {
+    String ctestParam = version;
+    System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
     return version;
   }
 
@@ -74,21 +76,31 @@ public class S3WritableConfiguration implements WriteableConfiguration {
 
   @Override
   public OutputStream getOutputStream() throws ConfigurationProviderException {
+    String ctestParam = s3Object.getBucketName();
+    System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
     return new S3OutputStream(s3Object.getBucketName(), s3Object.getKey(), s3);
   }
 
   @Override
   public InputStream getInputStream() throws ConfigurationProviderException {
+    String ctestParam = s3Object.getBucketName(); // which is the parameter? content? IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+    System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
     return s3Object.getObjectContent();
   }
 
   @Override
   public URL getURL() throws ConfigurationProviderException {
+    String ctestParam = s3Object.getBucketName();
+    System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+    ctestParam = s3Object.getKey();
+    System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
     return s3.getUrl(s3Object.getBucketName(), s3Object.getKey());
   }
 
   @Override
   public String getName() {
+    String ctestParam = s3Object.getKey();
+    System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
     return s3Object.getKey();
   }
 
