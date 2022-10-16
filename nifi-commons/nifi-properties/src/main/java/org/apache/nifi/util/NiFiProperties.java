@@ -449,6 +449,8 @@ public class NiFiProperties extends ApplicationProperties {
     // getters for core properties //
     public File getFlowConfigurationFile() {
         try {
+            String ctestParam = getProperty(FLOW_CONFIGURATION_FILE);
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return new File(getProperty(FLOW_CONFIGURATION_FILE));
         } catch (Exception ex) {
             return null;
@@ -457,7 +459,10 @@ public class NiFiProperties extends ApplicationProperties {
 
     public File getFlowConfigurationJsonFile() {
         final String jsonFilename = getProperty(FLOW_CONFIGURATION_JSON_FILE);
+
         if (jsonFilename != null) {
+            String ctestParam = jsonFilename;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return new File(jsonFilename);
         }
 
@@ -472,6 +477,8 @@ public class NiFiProperties extends ApplicationProperties {
 
     public File getFlowConfigurationFileDir() {
         try {
+            String ctestParam = getFlowConfigurationFile().getParentFile().getPath();
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return getFlowConfigurationFile().getParentFile();
         } catch (Exception ex) {
             return null;
@@ -480,7 +487,9 @@ public class NiFiProperties extends ApplicationProperties {
 
     private Integer getPropertyAsPort(final String propertyName, final Integer defaultValue) {
         final String port = getProperty(propertyName);
-        if (StringUtils.isEmpty(port)) {
+        if (StringUtils.Empty(port)) {
+            Integer ctestParam = defaultValue;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return defaultValue;
         }
         try {
@@ -488,8 +497,12 @@ public class NiFiProperties extends ApplicationProperties {
             if (val <= 0 || val > 65535) {
                 throw new RuntimeException("Valid port range is 0 - 65535 but got " + val);
             }
+            int ctestParam = val;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return val;
         } catch (final NumberFormatException e) {
+            Integer ctestParam = defaultValue;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return defaultValue;
         }
     }
@@ -497,12 +510,18 @@ public class NiFiProperties extends ApplicationProperties {
     public int getQueueSwapThreshold() {
         final String thresholdValue = getProperty(QUEUE_SWAP_THRESHOLD);
         if (thresholdValue == null) {
+            Integer ctestParam = DEFAULT_QUEUE_SWAP_THRESHOLD;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return DEFAULT_QUEUE_SWAP_THRESHOLD;
         }
 
         try {
+            Integer ctestParam = Integer.parseInt(thresholdValue);
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return Integer.parseInt(thresholdValue);
         } catch (final NumberFormatException e) {
+            Integer ctestParam = DEFAULT_QUEUE_SWAP_THRESHOLD;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return DEFAULT_QUEUE_SWAP_THRESHOLD;
         }
     }
@@ -510,18 +529,27 @@ public class NiFiProperties extends ApplicationProperties {
     public Integer getIntegerProperty(final String propertyName, final Integer defaultValue) {
         final String value = getProperty(propertyName);
         if (value == null || value.trim().isEmpty()) {
+            Integer ctestParam = defaultValue;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return defaultValue;
         }
 
         try {
+            Integer ctestParam = Integer.parseInt(value.trim());
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return Integer.parseInt(value.trim());
         } catch (final Exception e) {
             logger.warn("Configured value for property {} in nifi.properties is invalid, falling back to default value", propertyName, e);
+            Integer ctestParam = defaultValue;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
             return defaultValue;
         }
     }
 
     public String getAdministrativeYieldDuration() {
+        // String ctestParam = getProperty(ADMINISTRATIVE_YIELD_DURATION, DEFAULT_ADMINISTRATIVE_YIELD_DURATION);
+        // System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+        //print in getProperty
         return getProperty(ADMINISTRATIVE_YIELD_DURATION, DEFAULT_ADMINISTRATIVE_YIELD_DURATION);
     }
 
@@ -533,6 +561,10 @@ public class NiFiProperties extends ApplicationProperties {
      */
     public String getRemoteInputHost() {
         final String value = getProperty(REMOTE_INPUT_HOST);
+        if (!StringUtils.isBlank(value)){
+            String ctestParam = value;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+        }
         return StringUtils.isBlank(value) ? null : value;
     }
 
@@ -542,6 +574,7 @@ public class NiFiProperties extends ApplicationProperties {
      * @return the remote input port for RAW socket communication
      */
     public Integer getRemoteInputPort() {
+        //print in getProperty
         return getPropertyAsPort(REMOTE_INPUT_PORT, DEFAULT_REMOTE_INPUT_PORT);
     }
 
@@ -550,7 +583,8 @@ public class NiFiProperties extends ApplicationProperties {
      */
     public Boolean isSiteToSiteSecure() {
         final String secureVal = getProperty(SITE_TO_SITE_SECURE, "true");
-
+        Boolean ctestParam = !"false".equalsIgnoreCase(secureVal);
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return !"false".equalsIgnoreCase(secureVal);
 
     }
@@ -560,7 +594,8 @@ public class NiFiProperties extends ApplicationProperties {
      */
     public Boolean isSiteToSiteHttpEnabled() {
         final String remoteInputHttpEnabled = getProperty(SITE_TO_SITE_HTTP_ENABLED, "false");
-
+        Boolean ctestParam = "true".equalsIgnoreCase(remoteInputHttpEnabled);
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return "true".equalsIgnoreCase(remoteInputHttpEnabled);
 
     }
@@ -596,6 +631,8 @@ public class NiFiProperties extends ApplicationProperties {
             throw new RuntimeException("Remote input HTTP" + (isSiteToSiteSecure() ? "S" : "")
                     + " is enabled but " + propertyKey + " is not specified.");
         }
+        Integer ctestParam = port;
+        System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
         return port;
     }
 
@@ -606,6 +643,13 @@ public class NiFiProperties extends ApplicationProperties {
      */
     public Path getTemplateDirectory() {
         final String strVal = getProperty(TEMPLATE_DIRECTORY);
+        if (strVal == null){
+            String ctestParam = DEFAULT_TEMPLATE_DIRECTORY.toString();
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+        }else{
+            String ctestParam = strVal;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam);
+        }
         return (strVal == null) ? DEFAULT_TEMPLATE_DIRECTORY : Paths.get(strVal);
     }
 
@@ -1559,6 +1603,13 @@ public class NiFiProperties extends ApplicationProperties {
 
     public String getProperty(final String key, final String defaultValue) {
         final String value = getProperty(key);
+        if (value == null || value.trim().isEmpty()){
+            String ctestParam = defaultValue;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+        } else{
+            String ctestParam = value;
+            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+        }
         return (value == null || value.trim().isEmpty()) ? defaultValue : value;
     }
 
