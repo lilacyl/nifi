@@ -648,10 +648,10 @@ public class NiFiProperties extends ApplicationProperties {
         final String strVal = getProperty(TEMPLATE_DIRECTORY);
         if (strVal == null){
             String ctestParam = DEFAULT_TEMPLATE_DIRECTORY.toString();
-            System.out.println("[CTEST][GET-PARAM] " + ctestParam); //add ctest
+            System.out.println("[CTEST][GET-PARAM]," + TEMPLATE_DIRECTORY + "," + ctestParam); //add ctest
         }else{
             String ctestParam = strVal;
-            System.out.println("[CTEST][GET-PARAM] " + ctestParam);
+            System.out.println("[CTEST][GET-PARAM]," + TEMPLATE_DIRECTORY + "," + ctestParam); //add ctest
         }
         return (strVal == null) ? DEFAULT_TEMPLATE_DIRECTORY : Paths.get(strVal);
     }
@@ -663,7 +663,7 @@ public class NiFiProperties extends ApplicationProperties {
      */
     public String getFlowServiceWriteDelay() {
         String ctestParam = getProperty(WRITE_DELAY_INTERVAL);
-        System.out.println("[CTEST][GET-PARAM] " + ctestParam);//add ctest
+        System.out.println("[CTEST][GET-PARAM]," + WRITE_DELAY_INTERVAL + "," + ctestParam);//add ctest
         return getProperty(WRITE_DELAY_INTERVAL);
     }
 
@@ -677,7 +677,7 @@ public class NiFiProperties extends ApplicationProperties {
         final String rawAutoResumeState = getProperty(AUTO_RESUME_STATE,
                 DEFAULT_AUTO_RESUME_STATE.toString());
         boolean ctestParam = Boolean.parseBoolean(rawAutoResumeState);
-        System.out.println("[CTEST][GET-PARAM] " + ctestParam);//add ctest
+        System.out.println("[CTEST][GET-PARAM]," + AUTO_RESUME_STATE + "," + ctestParam);//add ctest
         return Boolean.parseBoolean(rawAutoResumeState);
     }
 
@@ -700,11 +700,11 @@ public class NiFiProperties extends ApplicationProperties {
         final String value = getProperty(RESTORE_DIRECTORY);
         if (StringUtils.isBlank(value)) {
             String ctestParam = "null"; //print? ask
-            System.out.println("[CTEST][GET-PARAM] " + ctestParam);//add ctest
+            System.out.println("[CTEST][GET-PARAM]," + RESTORE_DIRECTORY + "," + ctestParam);//add ctest
             return null;
         } else {
             String ctestParam = value;
-            System.out.println("[CTEST][GET-PARAM] " + ctestParam);//add ctest
+            System.out.println("[CTEST][GET-PARAM]," + RESTORE_DIRECTORY + "," + ctestParam);//add ctest
             return new File(value);
         }
     }
@@ -716,11 +716,11 @@ public class NiFiProperties extends ApplicationProperties {
         final String value = getProperty(AUTHORIZER_CONFIGURATION_FILE);
         if (StringUtils.isBlank(value)) {
             String ctestParam = DEFAULT_AUTHORIZER_CONFIGURATION_FILE;
-            System.out.println("[CTEST][GET-PARAM] " + ctestParam);//add ctest
+            System.out.println("[CTEST][GET-PARAM]," + AUTHORIZER_CONFIGURATION_FILE + "," +  ctestParam);//add ctest
             return new File(DEFAULT_AUTHORIZER_CONFIGURATION_FILE);
         } else {
             String ctestParam = value;
-            System.out.println("[CTEST][GET-PARAM] " + ctestParam);//add ctest
+            System.out.println("[CTEST][GET-PARAM]," + AUTHORIZER_CONFIGURATION_FILE + "," +  ctestParam);//add ctest
             return new File(value);
         }
     }
@@ -742,6 +742,8 @@ public class NiFiProperties extends ApplicationProperties {
         Integer port = null;
         try {
             port = Integer.parseInt(getProperty(WEB_HTTP_PORT));
+            String ctestParam = port;
+            System.out.println("[CTEST][GET-PARAM]," + WEB_HTTP_PORT + "," +  ctestParam);//add ctest
         } catch (NumberFormatException nfe) {
         }
         return port;
@@ -1788,10 +1790,24 @@ public class NiFiProperties extends ApplicationProperties {
             throw new RuntimeException(String.format("%s was '%s', expected true or false", NiFiProperties.ZOOKEEPER_CLIENT_SECURE, clientSecure));
         }
 
+        String ctestParam = clientSecure;
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_CLIENT_SECURE + "," + ctestParam); //add ctest
+
         return Boolean.parseBoolean(clientSecure);
     }
 
     public boolean isZooKeeperTlsConfigurationPresent() {
+
+        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_CLIENT_SECURE);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_CLIENT_SECURE + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_KEYSTORE + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_TRUSTSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_TRUSTSTORE + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_KEYSTORE_PASSWD + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_TRUSTSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_TRUSTSTORE_PASSWD + "," + ctestParam); //add ctest
         return StringUtils.isNotBlank(getProperty(NiFiProperties.ZOOKEEPER_CLIENT_SECURE))
                 && StringUtils.isNotBlank(getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE))
                 && getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE_PASSWD) != null
@@ -1800,6 +1816,14 @@ public class NiFiProperties extends ApplicationProperties {
     }
 
     public boolean isTlsConfigurationPresent() {
+        String ctestParam = getProperty(SECURITY_KEYSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_KEYSTORE + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(SECURITY_KEYSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_KEYSTORE_PASSWD + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(SECURITY_TRUSTSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_TRUSTSTORE + "," + ctestParam); //add ctest
+        String ctestParam = getProperty(SECURITY_TRUSTSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_TRUSTSTORE_PASSWD + "," + ctestParam); //add ctest
         return StringUtils.isNotBlank(getProperty(SECURITY_KEYSTORE))
                 && getProperty(SECURITY_KEYSTORE_PASSWD) != null
                 && StringUtils.isNotBlank(getProperty(SECURITY_TRUSTSTORE))
@@ -2217,6 +2241,7 @@ public class NiFiProperties extends ApplicationProperties {
         // The Properties(Properties) constructor does NOT inherit the provided values, just uses them as default values
         if (additionalProperties != null) {
             additionalProperties.forEach(properties::put);
+            properties.stringPropertyNames().stream().map(key -> "[CTEST][GET-PARAM]," + key + "," + properties.getProperty(key)).forEach(System.out::println);
         }
         return new NiFiProperties() {
             @Override
