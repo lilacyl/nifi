@@ -742,7 +742,7 @@ public class NiFiProperties extends ApplicationProperties {
         Integer port = null;
         try {
             port = Integer.parseInt(getProperty(WEB_HTTP_PORT));
-            String ctestParam = port;
+            String ctestParam = port.toString();
             System.out.println("[CTEST][GET-PARAM]," + WEB_HTTP_PORT + "," +  ctestParam);//add ctest
         } catch (NumberFormatException nfe) {
         }
@@ -1800,14 +1800,14 @@ public class NiFiProperties extends ApplicationProperties {
 
         String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_CLIENT_SECURE);
         System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_CLIENT_SECURE + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE);
-        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_KEYSTORE + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_TRUSTSTORE);
-        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_TRUSTSTORE + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE_PASSWD);
-        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_KEYSTORE_PASSWD + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_TRUSTSTORE_PASSWD);
-        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_TRUSTSTORE_PASSWD + "," + ctestParam); //add ctest
+        String ctestParam1 = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_KEYSTORE + "," + ctestParam1); //add ctest
+        String ctestParam2 = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_TRUSTSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_TRUSTSTORE + "," + ctestParam2); //add ctest
+        String ctestParam3 = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_KEYSTORE_PASSWD + "," + ctestParam3); //add ctest
+        String ctestParam4 = getProperty(NiFiProperties.ZOOKEEPER_SECURITY_TRUSTSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + ZOOKEEPER_SECURITY_TRUSTSTORE_PASSWD + "," + ctestParam4); //add ctest
         return StringUtils.isNotBlank(getProperty(NiFiProperties.ZOOKEEPER_CLIENT_SECURE))
                 && StringUtils.isNotBlank(getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE))
                 && getProperty(NiFiProperties.ZOOKEEPER_SECURITY_KEYSTORE_PASSWD) != null
@@ -1818,12 +1818,12 @@ public class NiFiProperties extends ApplicationProperties {
     public boolean isTlsConfigurationPresent() {
         String ctestParam = getProperty(SECURITY_KEYSTORE);
         System.out.println("[CTEST][GET-PARAM]," + SECURITY_KEYSTORE + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(SECURITY_KEYSTORE_PASSWD);
-        System.out.println("[CTEST][GET-PARAM]," + SECURITY_KEYSTORE_PASSWD + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(SECURITY_TRUSTSTORE);
-        System.out.println("[CTEST][GET-PARAM]," + SECURITY_TRUSTSTORE + "," + ctestParam); //add ctest
-        String ctestParam = getProperty(SECURITY_TRUSTSTORE_PASSWD);
-        System.out.println("[CTEST][GET-PARAM]," + SECURITY_TRUSTSTORE_PASSWD + "," + ctestParam); //add ctest
+        String ctestParam1 = getProperty(SECURITY_KEYSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_KEYSTORE_PASSWD + "," + ctestParam1); //add ctest
+        String ctestParam2 = getProperty(SECURITY_TRUSTSTORE);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_TRUSTSTORE + "," + ctestParam2); //add ctest
+        String ctestParam3 = getProperty(SECURITY_TRUSTSTORE_PASSWD);
+        System.out.println("[CTEST][GET-PARAM]," + SECURITY_TRUSTSTORE_PASSWD + "," + ctestParam3); //add ctest
         return StringUtils.isNotBlank(getProperty(SECURITY_KEYSTORE))
                 && getProperty(SECURITY_KEYSTORE_PASSWD) != null
                 && StringUtils.isNotBlank(getProperty(SECURITY_TRUSTSTORE))
