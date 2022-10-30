@@ -45,13 +45,16 @@ import java.util.stream.Stream;
  * The NiFiProperties class holds all properties which are needed for various
  * values to be available at runtime. It is strongly tied to the startup
  * properties needed and is often refer to as the 'nifi.properties' file. The
- * properties contains keys and values. Great care should be taken in leveraging
+ * properties contains keys and values. Great care should be taken in leve
+ * raging
  * this class or passing it along. Its use should be refactored and minimized
  * over time.
  */
 public class NiFiProperties extends ApplicationProperties {
     private static final Logger logger = LoggerFactory.getLogger(NiFiProperties.class);
-
+    //ctest
+    // public static final String CTEST_PROPERTIES_FILE_PATH = "../../../../../../test/resources/NiFiProperties/conf/ctest.properties";
+    public static final String CTEST_PROPERTIES_FILE_PATH = "nifi-commons/nifi-properties/src/test/resources/NiFiProperties/conf/ctest.properties";
     // core properties
     public static final String PROPERTIES_FILE_PATH = "nifi.properties.file.path";
     public static final String FLOW_CONFIGURATION_FILE = "nifi.flow.configuration.file";
@@ -2238,6 +2241,10 @@ public class NiFiProperties extends ApplicationProperties {
             readFromPropertiesFile(propertiesFilePath, properties);
         }
 
+        // ctest
+        readFromPropertiesFile(CTEST_PROPERTIES_FILE_PATH, properties);
+
+
         // The Properties(Properties) constructor does NOT inherit the provided values, just uses them as default values
         if (additionalProperties != null) {
             additionalProperties.forEach(properties::put);
@@ -2262,6 +2269,7 @@ public class NiFiProperties extends ApplicationProperties {
     }
 
     private static void readFromPropertiesFile(String propertiesFilePath, Properties properties) {
+        System.out.println("Inside readFromPropertiesFile !!!!" + CTEST_PROPERTIES_FILE_PATH);
         final String nfPropertiesFilePath = (propertiesFilePath == null)
                 ? System.getProperty(NiFiProperties.PROPERTIES_FILE_PATH)
                 : propertiesFilePath;
