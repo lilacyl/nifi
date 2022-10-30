@@ -2240,16 +2240,24 @@ public class NiFiProperties extends ApplicationProperties {
         if (propertiesFilePath == null || StringUtils.isNotBlank(propertiesFilePath)) {
             readFromPropertiesFile(propertiesFilePath, properties);
         }
+        String pre_inject = properties.getProperty("nifi.ui.autorefresh.interval");
+        System.out.println("Before injection: " + pre_inject);
 
         // ctest
         readFromPropertiesFile(CTEST_PROPERTIES_FILE_PATH, properties);
-
+        String post_inject = properties.getProperty("nifi.ui.autorefresh.interval");
+        System.out.println("After injection: " + post_inject);
+        
 
         // The Properties(Properties) constructor does NOT inherit the provided values, just uses them as default values
         if (additionalProperties != null) {
             additionalProperties.forEach(properties::put);
             properties.stringPropertyNames().stream().map(key -> "[CTEST][GET-PARAM]," + key + "," + properties.getProperty(key)).forEach(System.out::println);
         }
+        
+        String post_inject2 = properties.getProperty("nifi.ui.autorefresh.interval");
+        System.out.println("Check3 injection: " + post_inject2);
+
         return new NiFiProperties() {
             @Override
             public String getProperty(String key) {
