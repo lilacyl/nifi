@@ -53,8 +53,8 @@ import java.util.stream.Stream;
 public class NiFiProperties extends ApplicationProperties {
     private static final Logger logger = LoggerFactory.getLogger(NiFiProperties.class);
     //ctest
-    // public static final String CTEST_PROPERTIES_FILE_PATH = "../../../../../../test/resources/NiFiProperties/conf/ctest.properties";
-    public static final String CTEST_PROPERTIES_FILE_PATH = "nifi-commons/nifi-properties/src/test/resources/NiFiProperties/conf/ctest.properties";
+    public static final String CTEST_PROPERTIES_FILE_PATH = "./src/test/resources/NiFiProperties/conf/ctest.properties";
+    
     // core properties
     public static final String PROPERTIES_FILE_PATH = "nifi.properties.file.path";
     public static final String FLOW_CONFIGURATION_FILE = "nifi.flow.configuration.file";
@@ -2269,7 +2269,6 @@ public class NiFiProperties extends ApplicationProperties {
     }
 
     private static void readFromPropertiesFile(String propertiesFilePath, Properties properties) {
-        System.out.println("Inside readFromPropertiesFile !!!!" + CTEST_PROPERTIES_FILE_PATH);
         final String nfPropertiesFilePath = (propertiesFilePath == null)
                 ? System.getProperty(NiFiProperties.PROPERTIES_FILE_PATH)
                 : propertiesFilePath;
