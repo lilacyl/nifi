@@ -325,6 +325,7 @@ public abstract class NiFiProperties {
     // getters for core properties //
     public File getFlowConfigurationFile() {
         try {
+            System.out.println("[CTEST][GET-PARAM] " + FLOW_CONFIGURATION_FILE); //add ctest
             return new File(getProperty(FLOW_CONFIGURATION_FILE));
         } catch (Exception ex) {
             return null;
@@ -341,7 +342,9 @@ public abstract class NiFiProperties {
 
     private Integer getPropertyAsPort(final String propertyName, final Integer defaultValue) {
         final String port = getProperty(propertyName);
+        System.out.println("[CTEST][GET-PARAM] " + propertyName); //add ctest
         if (StringUtils.isEmpty(port)) {
+            
             return defaultValue;
         }
         try {
@@ -357,10 +360,10 @@ public abstract class NiFiProperties {
 
     public int getQueueSwapThreshold() {
         final String thresholdValue = getProperty(QUEUE_SWAP_THRESHOLD);
+        System.out.println("[CTEST][GET-PARAM] " + QUEUE_SWAP_THRESHOLD); 
         if (thresholdValue == null) {
             return DEFAULT_QUEUE_SWAP_THRESHOLD;
         }
-
         try {
             return Integer.parseInt(thresholdValue);
         } catch (final NumberFormatException e) {
@@ -370,10 +373,10 @@ public abstract class NiFiProperties {
 
     public Integer getIntegerProperty(final String propertyName, final Integer defaultValue) {
         final String value = getProperty(propertyName);
+        System.out.println("[CTEST][GET-PARAM] " + propertyName);
         if (value == null || value.trim().isEmpty()) {
             return defaultValue;
         }
-
         try {
             return Integer.parseInt(value.trim());
         } catch (final Exception e) {
@@ -387,6 +390,7 @@ public abstract class NiFiProperties {
 
     public int getSwapOutThreads() {
         final String value = getProperty(SWAP_OUT_THREADS);
+        System.out.println("[CTEST][GET-PARAM] " + SWAP_OUT_THREADS);
         if (value == null) {
             return DEFAULT_SWAP_OUT_THREADS;
         }
@@ -418,6 +422,7 @@ public abstract class NiFiProperties {
      */
     public String getRemoteInputHost() {
         final String value = getProperty(REMOTE_INPUT_HOST);
+        System.out.println("[CTEST][GET-PARAM] " + REMOTE_INPUT_HOST);
         return StringUtils.isBlank(value) ? null : value;
     }
 
@@ -491,6 +496,7 @@ public abstract class NiFiProperties {
      */
     public Path getTemplateDirectory() {
         final String strVal = getProperty(TEMPLATE_DIRECTORY);
+        System.out.println("[CTEST][GET-PARAM] " + TEMPLATE_DIRECTORY);
         return (strVal == null) ? DEFAULT_TEMPLATE_DIRECTORY : Paths.get(strVal);
     }
 
@@ -500,6 +506,7 @@ public abstract class NiFiProperties {
      * @return The write delay
      */
     public String getFlowServiceWriteDelay() {
+        System.out.println("[CTEST][GET-PARAM] " + WRITE_DELAY_INTERVAL);
         return getProperty(WRITE_DELAY_INTERVAL);
     }
 
@@ -543,6 +550,7 @@ public abstract class NiFiProperties {
      */
     public File getRestoreDirectory() {
         final String value = getProperty(RESTORE_DIRECTORY);
+        System.out.println("[CTEST][GET-PARAM] " + RESTORE_DIRECTORY);
         if (StringUtils.isBlank(value)) {
             return null;
         } else {
@@ -555,6 +563,7 @@ public abstract class NiFiProperties {
      */
     public File getAuthorizerConfigurationFile() {
         final String value = getProperty(AUTHORIZER_CONFIGURATION_FILE);
+        System.out.println("[CTEST][GET-PARAM] " + AUTHORIZER_CONFIGURATION_FILE);
         if (StringUtils.isBlank(value)) {
             return new File(DEFAULT_AUTHORIZER_CONFIGURATION_FILE);
         } else {
@@ -567,6 +576,7 @@ public abstract class NiFiProperties {
      */
     public File getLoginIdentityProviderConfigurationFile() {
         final String value = getProperty(LOGIN_IDENTITY_PROVIDER_CONFIGURATION_FILE);
+        System.out.println("[CTEST][GET-PARAM] " + LOGIN_IDENTITY_PROVIDER_CONFIGURATION_FILE);
         if (StringUtils.isBlank(value)) {
             return new File(DEFAULT_LOGIN_IDENTITY_PROVIDER_CONFIGURATION_FILE);
         } else {
@@ -577,6 +587,7 @@ public abstract class NiFiProperties {
     // getters for web properties //
     public Integer getPort() {
         Integer port = null;
+        System.out.println("[CTEST][GET-PARAM] " + WEB_HTTP_PORT);
         try {
             port = Integer.parseInt(getProperty(WEB_HTTP_PORT));
         } catch (NumberFormatException nfe) {
@@ -586,6 +597,7 @@ public abstract class NiFiProperties {
 
     public Integer getSslPort() {
         Integer sslPort = null;
+        System.out.println("[CTEST][GET-PARAM] " + WEB_HTTPS_PORT);
         try {
             sslPort = Integer.parseInt(getProperty(WEB_HTTPS_PORT));
         } catch (NumberFormatException nfe) {
@@ -656,6 +668,7 @@ public abstract class NiFiProperties {
                     || NAR_LIBRARY_AUTOLOAD_DIRECTORY.equals(propertyName)) {
                 // attempt to resolve the path specified
                 String narLib = getProperty(propertyName);
+                System.out.println("[CTEST][GET-PARAM] " + propertyName); //add ctest
                 if (!StringUtils.isBlank(narLib)) {
                     narLibraryPaths.add(Paths.get(narLib));
                 }
@@ -690,6 +703,7 @@ public abstract class NiFiProperties {
      * @return the interval over which the properties should auto refresh
      */
     public String getAutoRefreshInterval() {
+        System.out.println("[CTEST][GET-PARAM] " + UI_AUTO_REFRESH_INTERVAL); //add ctest
         return getProperty(UI_AUTO_REFRESH_INTERVAL);
     }
 
@@ -724,12 +738,14 @@ public abstract class NiFiProperties {
 
     // getters for cluster node properties //
     public boolean isNode() {
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_IS_NODE); //add ctest
         return Boolean.parseBoolean(getProperty(CLUSTER_IS_NODE));
     }
 
     public InetSocketAddress getClusterNodeProtocolAddress() {
         try {
             String socketAddress = getProperty(CLUSTER_NODE_ADDRESS);
+            System.out.println("[CTEST][GET-PARAM] " + CLUSTER_NODE_ADDRESS); //add ctest
             if (StringUtils.isBlank(socketAddress)) {
                 socketAddress = "localhost";
             }
@@ -741,9 +757,13 @@ public abstract class NiFiProperties {
     }
 
     public InetSocketAddress getClusterLoadBalanceAddress() {
+        System.out.println("[CTEST][GET-PARAM] " + LOAD_BALANCE_ADDRESS); //add ctest
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_NODE_ADDRESS); //add ctest
         try {
             String address = getProperty(LOAD_BALANCE_ADDRESS);
+            
             if (StringUtils.isBlank(address)) {
+                
                 address = getProperty(CLUSTER_NODE_ADDRESS);
             }
             if (StringUtils.isBlank(address)) {
@@ -758,6 +778,7 @@ public abstract class NiFiProperties {
     }
 
     public Integer getClusterNodeProtocolPort() {
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_NODE_PROTOCOL_PORT); //add ctest
         try {
             return Integer.parseInt(getProperty(CLUSTER_NODE_PROTOCOL_PORT));
         } catch (NumberFormatException nfe) {
@@ -774,6 +795,7 @@ public abstract class NiFiProperties {
     }
 
     public int getClusterNodeProtocolCorePoolSize() {
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_NODE_PROTOCOL_THREADS); //add ctest
         try {
             return Integer.parseInt(getProperty(CLUSTER_NODE_PROTOCOL_THREADS));
         } catch (NumberFormatException nfe) {
@@ -782,6 +804,7 @@ public abstract class NiFiProperties {
     }
 
     public int getClusterNodeProtocolMaxPoolSize() {
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_NODE_PROTOCOL_MAX_THREADS); //add ctest
         try {
             return Integer.parseInt(getProperty(CLUSTER_NODE_PROTOCOL_MAX_THREADS));
         } catch (NumberFormatException nfe) {
@@ -790,10 +813,12 @@ public abstract class NiFiProperties {
     }
 
     public boolean isClustered() {
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_IS_NODE); //add ctest
         return Boolean.parseBoolean(getProperty(CLUSTER_IS_NODE));
     }
 
     public File getClusterNodeFirewallFile() {
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_FIREWALL_FILE); //add ctest
         final String firewallFile = getProperty(CLUSTER_FIREWALL_FILE);
         if (StringUtils.isBlank(firewallFile)) {
             return null;
@@ -804,6 +829,7 @@ public abstract class NiFiProperties {
 
     public String getClusterProtocolManagerToNodeApiScheme() {
         final String isSecureProperty = getProperty(CLUSTER_PROTOCOL_IS_SECURE);
+        System.out.println("[CTEST][GET-PARAM] " + CLUSTER_PROTOCOL_IS_SECURE); //add ctest
         if (Boolean.valueOf(isSecureProperty)) {
             return "https";
         } else {
@@ -813,6 +839,7 @@ public abstract class NiFiProperties {
 
     public File getKerberosConfigurationFile() {
         final String krb5File = getProperty(KERBEROS_KRB5_FILE);
+        System.out.println("[CTEST][GET-PARAM] " + KERBEROS_KRB5_FILE);
         if (krb5File != null && krb5File.trim().length() > 0) {
             return new File(krb5File.trim());
         } else {
@@ -821,6 +848,7 @@ public abstract class NiFiProperties {
     }
 
     public String getKerberosServicePrincipal() {
+        System.out.println("[CTEST][GET-PARAM] " + KERBEROS_SERVICE_PRINCIPAL);
         final String servicePrincipal = getProperty(KERBEROS_SERVICE_PRINCIPAL);
         if (!StringUtils.isBlank(servicePrincipal)) {
             return servicePrincipal.trim();
@@ -830,6 +858,7 @@ public abstract class NiFiProperties {
     }
 
     public String getKerberosServiceKeytabLocation() {
+        System.out.println("[CTEST][GET-PARAM] " + KERBEROS_SERVICE_KEYTAB_LOCATION);
         final String keytabLocation = getProperty(KERBEROS_SERVICE_KEYTAB_LOCATION);
         if (!StringUtils.isBlank(keytabLocation)) {
             return keytabLocation.trim();
@@ -839,6 +868,7 @@ public abstract class NiFiProperties {
     }
 
     public String getKerberosSpnegoPrincipal() {
+        System.out.println("[CTEST][GET-PARAM] " + KERBEROS_SPNEGO_PRINCIPAL);
         final String spengoPrincipal = getProperty(KERBEROS_SPNEGO_PRINCIPAL);
         if (!StringUtils.isBlank(spengoPrincipal)) {
             return spengoPrincipal.trim();
@@ -848,6 +878,7 @@ public abstract class NiFiProperties {
     }
 
     public String getKerberosSpnegoKeytabLocation() {
+        System.out.println("[CTEST][GET-PARAM] " + KERBEROS_SPNEGO_KEYTAB_LOCATION);
         final String keytabLocation = getProperty(KERBEROS_SPNEGO_KEYTAB_LOCATION);
         if (!StringUtils.isBlank(keytabLocation)) {
             return keytabLocation.trim();
@@ -881,6 +912,7 @@ public abstract class NiFiProperties {
      * @return true if the login identity provider has been configured
      */
     public boolean isLoginIdentityProviderEnabled() {
+        System.out.println("[CTEST][GET-PARAM] " + NiFiProperties.SECURITY_USER_LOGIN_IDENTITY_PROVIDER);
         return !StringUtils.isBlank(getProperty(NiFiProperties.SECURITY_USER_LOGIN_IDENTITY_PROVIDER));
     }
 
@@ -899,6 +931,7 @@ public abstract class NiFiProperties {
      * @return OIDC discovery url
      */
     public String getOidcDiscoveryUrl() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_OIDC_DISCOVERY_URL);
         return getProperty(SECURITY_USER_OIDC_DISCOVERY_URL);
     }
 
@@ -926,6 +959,7 @@ public abstract class NiFiProperties {
      * @return OIDC client id
      */
     public String getOidcClientId() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_OIDC_CLIENT_ID);
         return getProperty(SECURITY_USER_OIDC_CLIENT_ID);
     }
 
@@ -935,6 +969,7 @@ public abstract class NiFiProperties {
      * @return OIDC client secret
      */
     public String getOidcClientSecret() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_OIDC_CLIENT_SECRET);
         return getProperty(SECURITY_USER_OIDC_CLIENT_SECRET);
     }
 
@@ -944,6 +979,7 @@ public abstract class NiFiProperties {
      * @return OIDC preferred json web signature algorithm
      */
     public String getOidcPreferredJwsAlgorithm() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_OIDC_PREFERRED_JWSALGORITHM);
         return getProperty(SECURITY_USER_OIDC_PREFERRED_JWSALGORITHM);
     }
 
@@ -962,6 +998,7 @@ public abstract class NiFiProperties {
      * @return Knox URL
      */
     public String getKnoxUrl() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_KNOX_URL);
         return getProperty(SECURITY_USER_KNOX_URL);
     }
 
@@ -971,6 +1008,7 @@ public abstract class NiFiProperties {
      * @return Knox audiences
      */
     public Set<String> getKnoxAudiences() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_KNOX_AUDIENCES);
         final String rawAudiences = getProperty(SECURITY_USER_KNOX_AUDIENCES);
         if (StringUtils.isBlank(rawAudiences)) {
             return null;
@@ -986,6 +1024,7 @@ public abstract class NiFiProperties {
      * @return path to the Knox public key
      */
     public Path getKnoxPublicKeyPath() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_KNOX_PUBLIC_KEY);
         return Paths.get(getProperty(SECURITY_USER_KNOX_PUBLIC_KEY));
     }
 
@@ -995,6 +1034,7 @@ public abstract class NiFiProperties {
      * @return name of the Knox cookie
      */
     public String getKnoxCookieName() {
+        System.out.println("[CTEST][GET-PARAM] " + SECURITY_USER_KNOX_COOKIE_NAME);
         return getProperty(SECURITY_USER_KNOX_COOKIE_NAME);
     }
 
@@ -1021,6 +1061,8 @@ public abstract class NiFiProperties {
 
         final String host;
         final Integer port;
+        System.out.println("[CTEST][GET-PARAM] " + WEB_HTTP_HOST);
+        System.out.println("[CTEST][GET-PARAM] " + WEB_HTTPS_HOST);
         if ("http".equalsIgnoreCase(scheme)) {
             // get host
             if (StringUtils.isBlank(getProperty(WEB_HTTP_HOST))) {
@@ -1061,6 +1103,7 @@ public abstract class NiFiProperties {
      * @throws InvalidPathException If the configured path is invalid
      */
     public Path getDatabaseRepositoryPath() {
+        System.out.println("[CTEST][GET-PARAM] " + REPOSITORY_DATABASE_DIRECTORY);
         return Paths.get(getProperty(REPOSITORY_DATABASE_DIRECTORY));
     }
 
@@ -1072,6 +1115,7 @@ public abstract class NiFiProperties {
      * @throws InvalidPathException If the configured path is invalid
      */
     public Path getFlowFileRepositoryPath() {
+        System.out.println("[CTEST][GET-PARAM] " + FLOWFILE_REPOSITORY_DIRECTORY);
         return Paths.get(getProperty(FLOWFILE_REPOSITORY_DIRECTORY));
     }
 
@@ -1090,6 +1134,7 @@ public abstract class NiFiProperties {
         // go through each property
         for (String propertyName : getPropertyKeys()) {
             // determine if the property is a file repository path
+            System.out.println("[CTEST][GET-PARAM] " + propertyName);
             if (StringUtils.startsWith(propertyName, REPOSITORY_CONTENT_PREFIX)) {
                 // get the repository key
                 final String key = StringUtils.substringAfter(propertyName,
@@ -1116,6 +1161,7 @@ public abstract class NiFiProperties {
         // go through each property
         for (String propertyName : getPropertyKeys()) {
             // determine if the property is a file repository path
+            System.out.println("[CTEST][GET-PARAM] " + propertyName);
             if (StringUtils.startsWith(propertyName, PROVENANCE_REPO_DIRECTORY_PREFIX)) {
                 // get the repository key
                 final String key = StringUtils.substringAfter(propertyName,
@@ -1138,6 +1184,7 @@ public abstract class NiFiProperties {
      * @return the maximum number of flow files per claim
      */
     public int getMaxFlowFilesPerClaim() {
+        System.out.println("[CTEST][GET-PARAM] " + MAX_FLOWFILES_PER_CLAIM);
         try {
             return Integer.parseInt(getProperty(MAX_FLOWFILES_PER_CLAIM));
         } catch (NumberFormatException nfe) {
@@ -1159,6 +1206,7 @@ public abstract class NiFiProperties {
 
     public String getProperty(final String key, final String defaultValue) {
         final String value = getProperty(key);
+        System.out.println("[CTEST][GET-PARAM] " + key);
         return (value == null || value.trim().isEmpty()) ? defaultValue : value;
     }
 
@@ -1171,19 +1219,23 @@ public abstract class NiFiProperties {
     }
 
     public String getLocalStateProviderId() {
+        System.out.println("[CTEST][GET-PARAM] " + STATE_MANAGEMENT_LOCAL_PROVIDER_ID);
         return getProperty(STATE_MANAGEMENT_LOCAL_PROVIDER_ID);
     }
 
     public String getClusterStateProviderId() {
+        System.out.println("[CTEST][GET-PARAM] " + STATE_MANAGEMENT_CLUSTER_PROVIDER_ID);
         return getProperty(STATE_MANAGEMENT_CLUSTER_PROVIDER_ID);
     }
 
     public File getEmbeddedZooKeeperPropertiesFile() {
+        System.out.println("[CTEST][GET-PARAM] " + STATE_MANAGEMENT_ZOOKEEPER_PROPERTIES);
         final String filename = getProperty(STATE_MANAGEMENT_ZOOKEEPER_PROPERTIES);
         return filename == null ? null : new File(filename);
     }
 
     public boolean isStartEmbeddedZooKeeper() {
+        System.out.println("[CTEST][GET-PARAM] " + STATE_MANAGEMENT_START_EMBEDDED_ZOOKEEPER);
         return Boolean.parseBoolean(getProperty(STATE_MANAGEMENT_START_EMBEDDED_ZOOKEEPER));
     }
 
@@ -1192,6 +1244,7 @@ public abstract class NiFiProperties {
     }
 
     public String getFlowConfigurationArchiveDir() {
+        System.out.println("[CTEST][GET-PARAM] " + FLOW_CONFIGURATION_ARCHIVE_DIR);
         return getProperty(FLOW_CONFIGURATION_ARCHIVE_DIR);
     }
 
@@ -1216,6 +1269,7 @@ public abstract class NiFiProperties {
     }
 
     public String getVariableRegistryProperties() {
+        System.out.println("[CTEST][GET-PARAM] " + VARIABLE_REGISTRY_PROPERTIES);
         return getProperty(VARIABLE_REGISTRY_PROPERTIES);
     }
 
@@ -1248,6 +1302,7 @@ public abstract class NiFiProperties {
 
         // go through each property
         for (String propertyName : getPropertyKeys()) {
+            System.out.println("[CTEST][GET-PARAM] " + propertyName);
             // determine if the property is a network interface name
             if (StringUtils.startsWith(propertyName, WEB_HTTP_NETWORK_INTERFACE_PREFIX)) {
                 // get the network interface property key
@@ -1270,6 +1325,7 @@ public abstract class NiFiProperties {
 
         // go through each property
         for (String propertyName : getPropertyKeys()) {
+            System.out.println("[CTEST][GET-PARAM] " + propertyName);
             // determine if the property is a network interface name
             if (StringUtils.startsWith(propertyName, WEB_HTTPS_NETWORK_INTERFACE_PREFIX)) {
                 // get the network interface property key
@@ -1286,6 +1342,7 @@ public abstract class NiFiProperties {
     }
 
     public String getProvenanceRepoEncryptionKeyId() {
+        System.out.println("[CTEST][GET-PARAM] " + PROVENANCE_REPO_ENCRYPTION_KEY_ID);
         return getProperty(PROVENANCE_REPO_ENCRYPTION_KEY_ID);
     }
 
@@ -1319,6 +1376,7 @@ public abstract class NiFiProperties {
 
         // Retrieve the actual key values and store non-empty values in the map
         for (String prop : keyProperties) {
+            System.out.println("[CTEST][GET-PARAM] " + prop);
             final String value = getProperty(prop);
             if (!StringUtils.isBlank(value)) {
                 if (prop.equalsIgnoreCase(PROVENANCE_REPO_ENCRYPTION_KEY)) {
@@ -1403,6 +1461,8 @@ public abstract class NiFiProperties {
 
     private List<String> getProvenanceRepositoryEncryptionKeyProperties() {
         // Filter all the property keys that define a key
+        System.out.println("[CTEST][GET-PARAM] " + PROVENANCE_REPO_ENCRYPTION_KEY_ID);
+        System.out.println("[CTEST][GET-PARAM] " + PROVENANCE_REPO_ENCRYPTION_KEY);
         return getPropertyKeys().stream().filter(k ->
                 k.startsWith(PROVENANCE_REPO_ENCRYPTION_KEY_ID + ".") || k.equalsIgnoreCase(PROVENANCE_REPO_ENCRYPTION_KEY)
         ).collect(Collectors.toList());
@@ -1412,6 +1472,7 @@ public abstract class NiFiProperties {
         long backPressureCount;
         try {
             String backPressureCountStr = getProperty(BACKPRESSURE_COUNT);
+            System.out.println("[CTEST][GET-PARAM] " + BACKPRESSURE_COUNT);
             if (backPressureCountStr == null || backPressureCountStr.trim().isEmpty()) {
                 backPressureCount = DEFAULT_BACKPRESSURE_COUNT;
             } else {
@@ -1483,6 +1544,7 @@ public abstract class NiFiProperties {
         return new NiFiProperties() {
             @Override
             public String getProperty(String key) {
+                System.out.println("[CTEST][GET-PARAM] " + key);
                 return properties.getProperty(key);
             }
 
