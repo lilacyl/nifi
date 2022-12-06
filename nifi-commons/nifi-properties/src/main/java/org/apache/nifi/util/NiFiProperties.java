@@ -44,6 +44,8 @@ import java.util.stream.Stream;
  * over time.
  */
 public abstract class NiFiProperties {
+    // ctest
+    public static final String CTEST_PROPERTIES_FILE_PATH = "src/test/resources/NiFiProperties/conf/ctest.properties";
 
     // core properties
     public static final String PROPERTIES_FILE_PATH = "nifi.properties.file.path";
@@ -1477,6 +1479,9 @@ public abstract class NiFiProperties {
                 }
             }
         }
+
+        readFromPropertiesFile(NiFiProperties.CTEST_PROPERTIES_FILE_PATH, properties);
+
         addProps.entrySet().stream().forEach((entry) -> {
             properties.setProperty(entry.getKey(), entry.getValue());
         });
@@ -1491,6 +1496,42 @@ public abstract class NiFiProperties {
                 return properties.stringPropertyNames();
             }
         };
+    }
+
+    private static void readFromPropertiesFile(String propertiesFilePath, Properties properties) {
+        System.out.println("Inside readFromPropertiesFile !!!!" + CTEST_PROPERTIES_FILE_PATH);
+        final String nfPropertiesFilePath = (propertiesFilePath == null)
+                ? System.getProperty(NiFiProperties.PROPERTIES_FILE_PATH)
+                : propertiesFilePath;
+        if (nfPropertiesFilePath != null) {
+            final File propertiesFile = new File(nfPropertiesFilePath.trim());
+            if (!propertiesFile.exists()) {
+                throw new RuntimeException("Properties file doesn't exist '"
+                        + propertiesFile.getAbsolutePath() + "'");
+            }
+            if (!propertiesFile.canRead()) {
+                throw new RuntimeException("Properties file exists but cannot be read '"
+                        + propertiesFile.getAbsolutePath() + "'");
+            }
+            InputStream inStream = null;
+            try {
+                inStream = new BufferedInputStream(new FileInputStream(propertiesFile));
+                properties.load(inStream);
+            } catch (final Exception ex) {
+                throw new RuntimeException("Cannot load properties file due to "
+                        + ex.getLocalizedMessage(), ex);
+            } finally {
+                if (null != inStream) {
+                    try {
+                        inStream.close();
+                    } catch (final Exception ex) {
+                        /**
+                         * do nothing *
+                         */
+                    }
+                }
+            }
+        }
     }
 
     /**
