@@ -52,6 +52,9 @@ import java.util.stream.Stream;
 public class NiFiProperties extends ApplicationProperties {
     private static final Logger logger = LoggerFactory.getLogger(NiFiProperties.class);
 
+    // ctest injection
+    public static final String CTEST_PROPERTIES_FILE_PATH = "src/test/resources/NiFiProperties/conf/ctest.properties";
+
     // core properties
     public static final String PROPERTIES_FILE_PATH = "nifi.properties.file.path";
     public static final String FLOW_CONFIGURATION_FILE = "nifi.flow.configuration.file";
@@ -2141,6 +2144,9 @@ public class NiFiProperties extends ApplicationProperties {
         if (propertiesFilePath == null || StringUtils.isNotBlank(propertiesFilePath)) {
             readFromPropertiesFile(propertiesFilePath, properties);
         }
+
+        // ctest
+        readFromPropertiesFile(CTEST_PROPERTIES_FILE_PATH, properties);
 
         // The Properties(Properties) constructor does NOT inherit the provided values, just uses them as default values
         if (additionalProperties != null) {
